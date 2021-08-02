@@ -94,7 +94,6 @@ def apiCall(i):
 ########################################################################################
 
 def main():
-
 	numCorrect = 0;
 
 	wb = spreadInit()
@@ -148,6 +147,7 @@ def main():
 		time.sleep(5)
 
 
+
 		
 	percent = float(numCorrect)/480.0
 	print("Number correct: " + str(numCorrect))
@@ -155,6 +155,11 @@ def main():
 	ws1.cell(row=23, column= 2, value=numCorrect)
 	wb.save('zoneTesting.xlsx')
 	print("sucess")
+	if input("Enter another? y/n") == 'y':
+		main()
+	 
+
+
 
 
 
