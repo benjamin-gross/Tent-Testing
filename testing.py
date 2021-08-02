@@ -54,6 +54,7 @@ current_time = now.strftime("%H:%M")
 currentHour = int(current_time[0:2])
 currentMinute = int(current_time[3:5])
 print("current time is: " + str(current_time))
+print("test")
 
 #Active tent count
 j = 0
