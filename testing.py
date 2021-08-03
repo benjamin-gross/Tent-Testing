@@ -6,26 +6,38 @@ import os
 import time
 
 
+sheetMade = False
 #spreadsheet setup
 if os.path.isfile('./zoneTesting.xlsx'):
 	wb = load_workbook('zoneTesting.xlsx')
 	ws = wb.active
+
 else:
 	wb = Workbook()
 	ws = [wb.active]
 	ws[0].title = 'Zone 1'
-	for i in range(24):
+	for i in range(25):
 		ws[i].cell(row=1, column=1, value="Trial Number")
 		ws[i].cell(row=23, column=1, value="Num Correct")
 		ws[i].cell(row=24, column=1, value="Percentage")
-		if i < 23:
+		if i < 24:
 			ws.append(wb.create_sheet("Zone " + str(i + 2)))
+if 'Zone 25' in wb.sheetnames:
+	nothing = 0
+else:
+	wb.create_sheet("Zone 25")
+	wa = wb.get_sheet_by_name('Zone 25')
+	wa.cell(row=1, column=1, value="Trial Number")
+	wa.cell(row=23, column=1, value="Num Correct")
+	wa.cell(row=24, column=1, value="Percentage")
+
+
 
 
 #Check if all avgs are added
 check = True
 systemAvgSum = 0.0
-for i in range(24):
+for i in range(25):
 	ws1 = wb.get_sheet_by_name('Zone ' + str(i+1))
 	if str(ws1['B24'].value) != "None":
 		print("Zone " + str(i + 1) + " " +str(ws1['B24'].value))
@@ -35,7 +47,7 @@ for i in range(24):
 		check = False
 
 if check:
-	avg =  float(systemAvgSum)/24.0
+	avg =  float(systemAvgSum)/25.0
 	print("all data was entered and the the system average is: " + str(avg))
 
 #zone input
