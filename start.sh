@@ -14,5 +14,7 @@ pip3 install openpyxl
 cd ~
 cd Desktop/
 git clone https://github.com/benjamin-gross/Tent-Testing.git
+cd Tent-Testing 
+cp start.sh ~/
 
 fi
