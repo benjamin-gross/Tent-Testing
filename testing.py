@@ -57,7 +57,7 @@ zoneNum = int(zoneIn)
 
 #api setup
 headers = {'Authorization': 'Token token="NaUtIlUs"',}
-url = 'http://tss-14619/api/tents/'
+url = 'http://tss-14185/api/tents/'
 
 
 #time check
@@ -75,6 +75,9 @@ numCorrect = 0;
 
 #ws[0].cell(row=1, column=zoneNum + 1, value= zoneNum)
 ws1 = wb.get_sheet_by_name('Zone ' + str(zoneNum))
+
+tent_aval = [1,2,4,5,7,8,9,10,11,12,13,14,16,17,19,21,22,23,25,26]
+
 #gets Zone
 for k in range(24):
 	ws1.cell(row = 1,column= k + 2, value = ("Trial " + str(k+1)) )
@@ -85,11 +88,12 @@ for k in range(24):
 	currentSecond = int(current_time[6:8])
 	for i in range(20):
 		#api call
-		fullUrl = url + str(i+1)
+		fullUrl = url + str(tent_aval[i])
 		response = requests.get(fullUrl, headers=headers)
 		tentInfo = response.json()
 
 		#parse
+		print("tent number: " + str(tent_aval[i]))
 		tent = tentInfo['tent']
 		tentNum = tent['number']
 		scanTime = tent['scanned_at']
