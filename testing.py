@@ -18,8 +18,8 @@ else:
 	ws[0].title = 'Zone 1'
 	for i in range(25):
 		ws[i].cell(row=1, column=1, value="Trial Number")
-		ws[i].cell(row=23, column=1, value="Num Correct")
-		ws[i].cell(row=24, column=1, value="Percentage")
+		ws[i].cell(row=33, column=1, value="Num Correct")
+		ws[i].cell(row=34, column=1, value="Percentage")
 		if i < 24:
 			ws.append(wb.create_sheet("Zone " + str(i + 2)))
 if 'Zone 25' in wb.sheetnames:
@@ -28,8 +28,8 @@ else:
 	wb.create_sheet("Zone 25")
 	wa = wb.get_sheet_by_name('Zone 25')
 	wa.cell(row=1, column=1, value="Trial Number")
-	wa.cell(row=23, column=1, value="Num Correct")
-	wa.cell(row=24, column=1, value="Percentage")
+	wa.cell(row=33, column=1, value="Num Correct")
+	wa.cell(row=34, column=1, value="Percentage")
 
 
 
@@ -39,10 +39,10 @@ check = True
 systemAvgSum = 0.0
 for i in range(25):
 	ws1 = wb.get_sheet_by_name('Zone ' + str(i+1))
-	if str(ws1['B24'].value) != "None":
-		print("Zone " + str(i + 1) + " " +str(ws1['B24'].value))
-		systemAvgSum = systemAvgSum + float(ws1['B24'].value)
-		x = float(ws1['B24'].value)
+	if str(ws1['B34'].value) != "None":
+		print("Zone " + str(i + 1) + " " +str(ws1['B34'].value))
+		systemAvgSum = systemAvgSum + float(ws1['B34'].value)
+		x = float(ws1['B34'].value)
 	else:
 		check = False
 
@@ -57,7 +57,7 @@ zoneNum = int(zoneIn)
 
 #api setup
 headers = {'Authorization': 'Token token="NaUtIlUs"',}
-url = 'http://tss-14185/api/tents/'
+url = 'http://tss-14127/api/tents/'
 
 
 #time check
@@ -76,7 +76,7 @@ numCorrect = 0;
 #ws[0].cell(row=1, column=zoneNum + 1, value= zoneNum)
 ws1 = wb.get_sheet_by_name('Zone ' + str(zoneNum))
 
-tent_aval = [1,2,4,5,7,8,9,10,11,12,13,14,16,17,19,21,22,23,25,26]
+tent_aval = [1,2,4,5,7,8,9,10,11,12,13,14,15,16,17,19,20,21,22,23,25,26,27,28,29,30,31,32,33,52]
 
 #gets Zone
 for k in range(24):
@@ -86,7 +86,7 @@ for k in range(24):
 	currentHour = int(current_time[0:2])
 	currentMinute = int(current_time[3:5])
 	currentSecond = int(current_time[6:8])
-	for i in range(20):
+	for i in range(30):
 		#api call
 		fullUrl = url + str(tent_aval[i])
 		response = requests.get(fullUrl, headers=headers)
@@ -131,10 +131,10 @@ for k in range(24):
 
 
 		
-percent = float(numCorrect)/480.0
+percent = float(numCorrect)/720.0
 print("Number correct: " + str(numCorrect))
-ws1.cell(row = 24, column = 2, value = percent)
-ws1.cell(row=23, column= 2, value=numCorrect)
+ws1.cell(row = 34, column = 2, value = percent)
+ws1.cell(row=33, column= 2, value=numCorrect)
 wb.save('zoneTesting.xlsx')
 print("sucess")
 
