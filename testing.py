@@ -50,6 +50,10 @@ if check:
 	avg =  float(systemAvgSum)/25.0
 	print("all data was entered and the the system average is: " + str(avg))
 
+#server type?
+server =  input("Are You Using the V2 or V3 server?: ")
+print("Server Selected : " + server)
+
 #zone input
 zoneIn = input("Enter Zone Number:")
 print("Zone selected : " + zoneIn)
@@ -57,7 +61,17 @@ zoneNum = int(zoneIn)
 
 #api setup
 headers = {'Authorization': 'Token token="NaUtIlUs"',}
-url = 'http://tss-14127/api/tents/'
+url1 = 'http://tss-14127/api/tents/'
+url2 = 'http://tss-14185/api/tents/'
+
+if server == "v2" or server == "V2":
+	url = url2
+elif server == "v3" or server == "V3":
+	url = url1
+else:
+	print("INVALID INPUT")
+	quit()
+
 
 
 #time check
@@ -66,7 +80,7 @@ current_time = now.strftime("%H:%M")
 currentHour = int(current_time[0:2])
 currentMinute = int(current_time[3:5])
 print("current time is: " + str(current_time))
-print("test")
+
 
 #Active tent count
 j = 0
